@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "chiomavee/blogging-app:${BUILD_NUMBER}"
-        SONARQUBE_SERVER = 'SonarQube'
+        SONARQUBE_SERVER = 'sonarqube'
         NEXUS_URL = 'http://192.168.0.150:8081/repository/maven-releases/'
     }
 
