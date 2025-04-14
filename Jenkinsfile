@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    credentialsId: 'github',
+                    credentialsId: 'github1',
                     url: 'https://github.com/chiomanwanedo/FullStack-Blogging-App.git'
             }
         }
