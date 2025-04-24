@@ -45,8 +45,7 @@ pipeline {
         stage('Publish to Nexus') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
-                    sh 'mvn clean deploy -DaltDeploymentRepository=nexus::default::http://nexus:8081/repository/maven-releases/'
-                }
+                    sh 'mvn clean deploy -DaltDeploymentRepository=nexus::default::http://172.20.0.2:8081/repository/maven-releases/'
             }
         }
 
