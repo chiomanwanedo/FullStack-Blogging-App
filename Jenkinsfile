@@ -43,16 +43,12 @@ pipeline {
 
         stage('Publish to Nexus') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
-                    sh '''
-                        mvn clean deploy \
-                        -DaltDeploymentRepository=nexus::default::http://nexus:8081/repository/maven-releases/ \
-                        -Dusername=$NEXUS_USER \
-                        -Dpassword=$NEXUS_PASS
-                    '''
-                }
-            }
-        }
+                sh '''
+                    mvn clean deploy \
+                    -DaltDeploymentRepository=nexus::default::http://nexus:8081/repository/maven-releases/
+                '''
+    }
+}
 
         stage('Docker Build & Push') {
             steps {
