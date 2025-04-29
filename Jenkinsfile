@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3'        // Must match name in Jenkins Global Tool Configuration
-        jdk 'jdk17'            // Match your configured JDK name
+        maven 'Maven 3'
+        jdk 'jdk17'
     }
 
     environment {
@@ -33,7 +33,7 @@ pipeline {
             }
         }
 
-        stage('sonarqube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh 'mvn clean verify sonar:sonar'
@@ -47,8 +47,8 @@ pipeline {
                     mvn clean deploy \
                     -DaltDeploymentRepository=nexus::default::http://nexus:8081/repository/maven-releases/
                 '''
-    }
-}
+            }
+        }
 
         stage('Docker Build & Push') {
             steps {
@@ -66,8 +66,10 @@ pipeline {
             steps {
                 sh "kubectl set image deployment/blogging-app blogging-app=$DOCKER_IMAGE"
                 sh "kubectl rollout status deployment/blogging-app"
-                }
+            }
         }
+    }
+
     post {
         always {
             cleanWs()
