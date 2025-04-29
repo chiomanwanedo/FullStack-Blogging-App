@@ -64,11 +64,10 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl set image deployment/blogging-app blogging-app=$DOCKER_IMAGE'
-            }
+                sh "kubectl set image deployment/blogging-app blogging-app=$DOCKER_IMAGE"
+                sh "kubectl rollout status deployment/blogging-app"
+                }
         }
-    }
-
     post {
         always {
             cleanWs()
